@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -18,7 +19,8 @@ import {
   Image as ImageIcon,
   Type,
   Palette,
-  Save
+  Save,
+  Code
 } from 'lucide-react';
 
 interface ToolbarProps {
@@ -85,6 +87,16 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload, onSave }) => {
         className={editor.isActive('underline') ? 'bg-muted' : ''}
       >
         <Underline className="h-4 w-4" />
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        className={editor.isActive('code') ? 'bg-muted' : ''}
+        title="Code"
+      >
+        <Code className="h-4 w-4" />
       </Button>
 
       <Popover>
