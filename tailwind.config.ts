@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -89,8 +90,53 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '100%',
+						color: 'var(--foreground)',
+						a: {
+							color: 'hsl(var(--primary))',
+							'&:hover': {
+								color: 'hsl(var(--primary))',
+							},
+						},
+						strong: {
+							color: 'var(--foreground)',
+						},
+						h1: {
+							color: 'var(--foreground)',
+						},
+						h2: {
+							color: 'var(--foreground)',
+						},
+						h3: {
+							color: 'var(--foreground)',
+						},
+						h4: {
+							color: 'var(--foreground)',
+						},
+						h5: {
+							color: 'var(--foreground)',
+						},
+						h6: {
+							color: 'var(--foreground)',
+						},
+						code: {
+							color: 'var(--foreground)',
+						},
+						img: {
+							display: 'inline-block',
+							maxWidth: '100%',
+						},
+					},
+				},
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require('@tailwindcss/typography'),
+	],
 } satisfies Config;
