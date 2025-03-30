@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -18,15 +17,17 @@ import {
   Link,
   Image as ImageIcon,
   Type,
-  Palette
+  Palette,
+  Save
 } from 'lucide-react';
 
 interface ToolbarProps {
   editor: any;
   onImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSave?: () => void;
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload, onSave }) => {
   if (!editor) {
     return null;
   }
@@ -86,7 +87,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
         <Underline className="h-4 w-4" />
       </Button>
 
-      {/* Headings Dropdown */}
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="ghost" size="icon">
@@ -147,7 +147,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
         </PopoverContent>
       </Popover>
 
-      {/* Font Size Dropdown */}
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="ghost" className="px-2 text-xs gap-1">
@@ -171,7 +170,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
         </PopoverContent>
       </Popover>
 
-      {/* Color Picker */}
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="ghost" size="icon">
@@ -193,7 +191,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
         </PopoverContent>
       </Popover>
 
-      {/* Link Button */}
       <Popover>
         <PopoverTrigger asChild>
           <Button 
@@ -237,7 +234,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
         </PopoverContent>
       </Popover>
 
-      {/* Image Upload Button */}
       <Button variant="ghost" size="icon" className="relative" asChild>
         <label>
           <ImageIcon className="h-4 w-4" />
@@ -248,6 +244,15 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor, onImageUpload }) => {
             onChange={onImageUpload}
           />
         </label>
+      </Button>
+
+      <Button
+        variant="outline"
+        size="sm"
+        className="ml-auto"
+        onClick={onSave}
+      >
+        <Save className="h-4 w-4 mr-2" /> 儲存
       </Button>
     </div>
   );

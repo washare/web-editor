@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const WysiwygEditor = () => {
   const [content, setContent] = useState('<p>Start typing here...</p>');
+  const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
   const editor = useEditor({
@@ -58,6 +59,35 @@ const WysiwygEditor = () => {
     e.target.value = '';
   };
 
+  const handleSaveContent = async () => {
+    if (isSaving) return;
+    
+    try {
+      setIsSaving(true);
+      
+      // 這裡我們暫時使用一個模擬的保存功能
+      // 在實際整合資料庫前，我們先顯示一個成功的提示
+      console.log("Content to save:", content);
+      
+      // 模擬API調用延遲
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "儲存成功",
+        description: "內容已儲存到暫存區域。要永久保存，請整合資料庫。",
+      });
+    } catch (error) {
+      console.error("儲存失敗", error);
+      toast({
+        title: "儲存失敗",
+        description: "無法保存內容，請稍後再試。",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="w-full">
       <Card>
@@ -72,7 +102,11 @@ const WysiwygEditor = () => {
             </TabsList>
             <TabsContent value="edit">
               <div className="space-y-4">
-                <Toolbar editor={editor} onImageUpload={handleImageUpload} />
+                <Toolbar 
+                  editor={editor} 
+                  onImageUpload={handleImageUpload} 
+                  onSave={handleSaveContent}
+                />
                 <div className="border rounded-md p-4 min-h-[300px]">
                   <EditorContent editor={editor} className="prose max-w-none" />
                 </div>
